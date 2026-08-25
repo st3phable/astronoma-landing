@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astronoma — Total Financial Sovereignty</title>
+  <meta name="description" content="Astronoma unifies real-time banking feeds and digital assets into one constellation. Polaris is the high-performance dashboard. per aspera ad astra." />
+  <meta name="theme-color" content="#0a0a12" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --violet: #D894FE;
+      --violet-dim: #a66cc9;
+      --violet-glow: rgba(216, 148, 254, 0.35);
+      --bg: #07070d;
+      --surface: #0e0e18;
+      --surface-2: #141422;
+      --text: #e8e4f0;
+      --muted: #8b849e;
+      --border: rgba(216, 148, 254, 0.18);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .mono { font-family: 'Space Mono', ui-monospace, monospace; }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: rgba(7, 7, 13, 0.75);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .nav-brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .nav-brand span {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--violet); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--violet);
+      color: #0a0a12;
+      box-shadow: 0 0 24px var(--violet-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 32px var(--violet-glow);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      border-color: var(--violet);
+      color: var(--violet);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 1.5rem 4rem;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(216,148,254,0.18), transparent 60%),
+                  radial-gradient(ellipse 60% 40% at 80% 60%, rgba(100,60,180,0.12), transparent),
+                  linear-gradient(180deg, #0a0a14 0%, #07070d 100%);
+      z-index: 0;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(7,7,13,0.6) 80%, var(--bg) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      text-align: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(216, 148, 254, 0.08);
+      color: var(--violet);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 .accent { color: var(--violet); }
+    .hero p.lead {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 2rem;
+      font-weight: 400;
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+    .motto {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--violet-dim);
+      letter-spacing: 0.15em;
+      text-transform: lowercase;
+    }
+
+    /* Features */
+    section {
+      padding: 5rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover {
+      border-color: var(--violet-dim);
+      transform: translateY(-2px);
+    }
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(216, 148, 254, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .card p {
+      font-size: 0.925rem;
+      color: var(--muted);
+    }
+
+    /* Constellation visual */
+    .constellation-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      padding: 4rem 0;
+    }
+    @media (max-width: 800px) {
+      .constellation-block { grid-template-columns: 1fr; }
+      .nav-links a:not(.btn) { display: none; }
+    }
+    .constellation-block img {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .constellation-copy h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+    .constellation-copy p {
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+    .pill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .pill-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+    }
+    .pill-list li::before {
+      content: '✦';
+      color: var(--violet);
+      font-size: 0.7rem;
+    }
+
+    /* Products */
+    .products {
+      background: var(--surface);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      margin-top: 2rem;
+    }
+    .product-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .product-row:last-child { border-bottom: none; }
+    .product-name {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      color: var(--violet);
+      font-size: 0.95rem;
+    }
+    .product-desc h4 {
+      font-size: 1.05rem;
+      margin-bottom: 0.35rem;
+    }
+    .product-desc p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      padding: 6rem 1.5rem;
+      position: relative;
+    }
+    .cta-box {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(216,148,254,0.12), rgba(14,14,24,0.9));
+      border: 1px solid var(--border);
+      box-shadow: 0 0 80px var(--violet-glow);
+    }
+    .cta-box h2 {
+      font-size: 1.85rem;
+      margin-bottom: 0.75rem;
+    }
+    .cta-box p {
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    footer .mono { color: var(--violet-dim); margin-bottom: 0.5rem; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--violet); }
+
+    /* Stars decoration */
+    .stars {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 40% 70%, rgba(216,148,254,0.5), transparent),
+        radial-gradient(1.5px 1.5px at 70% 20%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 90% 50%, rgba(216,148,254,0.4), transparent),
+        radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,0.25), transparent);
+      background-size: 100% 100%;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-brand" href="/">
+      <span style="font-size:1.4rem;color:var(--violet)">✦</span>
+      <span>ASTRONOMA</span>
+    </a>
+    <div class="nav-links">
+      <a href="#constellation">Constellation</a>
+      <a href="#products">Products</a>
+      <a href="#values">Values</a>
+      <a class="btn btn-primary" href="#waitlist">Request Access</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="stars"></div>
+    <div class="hero-content">
+      <div class="eyebrow">✦ Financial Sovereignty</div>
+      <h1>One constellation.<br><span class="accent">Total clarity.</span></h1>
+      <p class="lead">
+        Astronoma unifies real-time banking feeds and digital assets into a single high-performance book of record. Built for complex multi-account lives.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#waitlist">Join the waitlist</a>
+        <a class="btn btn-ghost" href="#products">Explore Polaris</a>
+      </div>
+      <p class="motto">per aspera ad astra</p>
+    </div>
+  </header>
+
+  <section id="constellation">
+    <p class="section-label">The Book of Record</p>
+    <h2 class="section-title">Your financial universe, one view</h2>
+    <p class="section-desc">
+      Complex ecosystems fracture across banks, wallets, and budgets. Astronoma stitches them into a living constellation you can actually operate.
+    </p>
+
+    <div class="constellation-block">
+      <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#141422,#0e0e18);border-radius:16px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+        <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 40%, rgba(216,148,254,0.25), transparent 40%),radial-gradient(circle at 70% 60%, rgba(100,60,180,0.2), transparent 35%)"></div>
+        <div style="position:relative;z-index:1;text-align:center;padding:2rem">
+          <div style="font-size:3rem;margin-bottom:0.5rem">✦ · ◈ · ✧</div>
+          <div class="mono" style="color:var(--violet);font-size:0.85rem;letter-spacing:0.1em">CONSTELLATION</div>
+          <div style="color:var(--muted);font-size:0.8rem;margin-top:0.5rem">fiat + digital · one book</div>
+        </div>
+      </div>
+      <div class="constellation-copy">
+        <h2>Unify the constellation</h2>
+        <p>
+          Real-time Plaid-class banking feeds sit beside on-chain wallets. Ready-to-Assign cash (envelopes) lives next to digital allocation — zero-based clarity without leaving the dashboard.
+        </p>
+        <ul class="pill-list">
+          <li>Total Cash Pool → Ready-to-Assign (RTA)</li>
+          <li>Upsert-safe transaction sync on plaidTransactionId</li>
+          <li>Local-first privacy; secrets stay in Keychain</li>
+          <li>Slack-native agent (Astra) for team briefs</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="products">
+    <p class="section-label">Surfaces</p>
+    <h2 class="section-title">Polaris · Astra · Companion</h2>
+    <p class="section-desc">
+      The product surface treats life and finance as one system. Native where it matters; chat where the team already lives.
+    </p>
+
+    <div class="products">
+      <div class="product-row">
+        <div class="product-name">POLARIS</div>
+        <div class="product-desc">
+          <h4>High-performance dashboard & life-OS</h4>
+          <p>
+            Native macOS (SwiftUI + SwiftData) and Windows Electron MVP. Finance hub, Plaid sync, budget envelopes, questlines (Brain / Fin / Fit), journal, household, stardust economy. Local-first by design.
+          </p>
+        </div>
+      </div>
+      <div class="product-row">
+        <div class="product-name">ASTRA</div>
+        <div class="product-desc">
+          <h4>Slack agent for operators</h4>
+          <p>
+            Unified asset briefs, constellation snapshots (demo or live when connected), investor/ops/support one-pagers, channel summaries. Never executes transfers. Grok-powered, knowledge-grounded.
+          </p>
+        </div>
+      </div>
+      <div class="product-row">
+        <div class="product-name">PLAID COMPANION</div>
+        <div class="product-desc">
+          <h4>Secure local Link service</h4>
+          <p>
+            Node companion at 127.0.0.1 issues link tokens and syncs transactions. Secrets never leave the secure boundary. Invariants protect institution items from manual envelope rewrites.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Capabilities</p>
+    <h2 class="section-title">What ships in the constellation</h2>
+    <div class="grid-3" style="margin-top: 2rem;">
+      <div class="card">
+        <div class="card-icon">◎</div>
+        <h3>Unified book</h3>
+        <p>Fiat + digital in one net-worth view. No more tab-hopping across banks and explorers.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">◇</div>
+        <h3>Ready-to-Assign</h3>
+        <p>YNAB-style envelopes meet live Plaid. Zero-based budgeting with real account truth.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">✦</div>
+        <h3>Questlines</h3>
+        <p>FinMaxxing, BrainMaxxing, FitMaxxing — long-horizon goals broken into dated quests.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⬡</div>
+        <h3>Privacy first</h3>
+        <p>Local persistence. Access tokens never in Slack, logs, or git. Demo numbers clearly labeled.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">◈</div>
+        <h3>Operator agent</h3>
+        <p>Astra drafts briefs and teaches the product without leaving the team’s chat surface.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">✧</div>
+        <h3>No hype</h3>
+        <p>Precise language. No invented balances. Security, Web3, trust, privacy, collaboration.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="values">
+    <p class="section-label">Values</p>
+    <h2 class="section-title">Security · Web3 · Trust · Privacy · Collaboration</h2>
+    <p class="section-desc">
+      Tone is playful enough to feel human, formal enough for finance, serious about risk. Aesthetic: starry, soft violet, Space Mono. Never invent money or legal advice.
+    </p>
+  </section>
+
+  <section class="cta-section" id="waitlist">
+    <div class="cta-box">
+      <p class="section-label" style="justify-content:center; display:flex;">Early access</p>
+      <h2>Through hardships, to the stars</h2>
+      <p>
+        Astronoma is building the foundation for total financial sovereignty. Join the waitlist for Polaris and operator access to Astra.
+      </p>
+      <form id="waitlist-form" onsubmit="event.preventDefault(); alert('Thanks — we will be in touch. (Demo form; wire to your backend later.)');">
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; justify-content:center;">
+          <input type="email" required placeholder="you@domain.com" style="
+            flex:1; min-width:220px; padding:0.75rem 1rem; border-radius:999px;
+            border:1px solid var(--border); background:var(--bg); color:var(--text);
+            font-family:inherit; font-size:0.95rem; outline:none;
+          " />
+          <button type="submit" class="btn btn-primary">Request access</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p class="mono">ASTRONOMA · per aspera ad astra</p>
+    <p>© 2026 Astronoma. Building the constellation.</p>
+    <p style="margin-top:0.75rem;">
+      <a href="mailto:berd2k@pm.me">Contact</a>
+      ·
+      <a href="https://stephanierd.dev" target="_blank" rel="noopener">Founder</a>
+    </p>
+  </footer>
+</body>
+</html>
